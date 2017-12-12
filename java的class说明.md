@@ -1,6 +1,6 @@
 ```java
 //一个文件中可以定义多个class，但只能有一个class用public声明
-//TrieNode类与文件名不同，则编译出来的是TrieNode.class
+//TrieNode类与文件名不同，则编译出来的是TrieNode.class，而不是“文件名.class”
 class TrieNode {
     public char val;
     public boolean isWord;
@@ -37,7 +37,6 @@ public class Trie {
         node.isWord = true;
     }
 
-
     public boolean search(String word) {
         TrieNode node = this.root;
         for (int i = 0; i < word.length(); i++) {
@@ -47,7 +46,6 @@ public class Trie {
         }
         return node.isWord;
     }
-
 
     public boolean startsWith(String prefix) {
         TrieNode node = this.root;

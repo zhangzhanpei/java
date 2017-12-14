@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class DataType {
     public static void main(String[] args) {
@@ -50,5 +51,16 @@ public class DataType {
         String[] strArr = new String[al.size()];
         al.toArray(strArr); //ArrayList to Array
         System.out.println(Arrays.toString(strArr));
+
+        //HashMap
+        HashMap<String, Double> map = new HashMap<>();
+        map.put("语文", 130.0); //插入键值对
+        map.put("数学", 100.0);
+        map.put("物理", 138.0);
+        System.out.println(map.size()); //获取map键值对数量
+        map.put("物理", 90.0); //更新某个键的值
+        map.remove("物理"); //删除键值对
+        System.out.println(map.get("物理")); //由键获取值
+        map.forEach((key, val) -> System.out.println(key + "成绩:" + val)); //打印所有键值对
     }
 }

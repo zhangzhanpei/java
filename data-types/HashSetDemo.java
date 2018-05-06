@@ -20,14 +20,34 @@ public class HashSetDemo {
         System.out.println(set.contains(3));
 
         // 移除元素
-        set.remove(3);
+        //set.remove(3);
 
         // 遍历集合
         set.forEach(i -> System.out.println(i));
 
-        //Iterator iter = set.iterator();
-        //while (iter.hasNext()) {
-        //    System.out.println(iter.next());
-        //}
+        Set<Integer> anotherSet = new HashSet<>();
+        anotherSet.add(2);
+        anotherSet.add(3);
+        anotherSet.add(4);
+
+        // 集合运算
+        Set<Integer> resultSet = new HashSet<>();
+
+        // 交集，set 和 anotherSet 共有的元素
+        resultSet.addAll(set);
+        resultSet.retainAll(anotherSet);
+        System.out.println(resultSet); // [2, 3]
+
+        // 差集，set 有而 anotherSet 没有的元素
+        resultSet.clear();
+        resultSet.addAll(set);
+        resultSet.removeAll(anotherSet);
+        System.out.println(resultSet); // [1]
+
+        // 并集，两个集合的元素合并
+        resultSet.clear();
+        resultSet.addAll(set);
+        resultSet.addAll(anotherSet);
+        System.out.println(resultSet); // [1, 2, 3, 4]
     }
 }

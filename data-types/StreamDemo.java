@@ -30,5 +30,36 @@ public class StreamDemo {
         boolean allMatch = list.stream().allMatch(i -> i > 0); // false
         boolean anyMatch = list.stream().anyMatch(i -> i < 0); // true
         boolean noneMatch = list.stream().noneMatch(i -> i < 0); // false
+
+        // 归约
+        // reduce() 方法分为有初始值和无初始值的，有初始值的会返回与初始值类型一致的结果，无初始值的返回 Optional 类型
+        // 给定初始值0，返回结果也是整数类型的
+        Integer sum = list.stream().reduce(0, Integer::sum);
+        System.out.println(sum); // 37
+
+        // 无初始值，返回 Optional 类型
+        Optional<Integer> op = list.stream().reduce(Integer::sum);
+        op.ifPresent(System.out::println); // 37
+
+        // 员工类
+        class Employee {
+            public String name;
+            public int age;
+            Employee(String name, int age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+        List<Employee> employees = Arrays.asList(new Employee("zhangsan", 19), new Employee("lisi", 24));
+        // 数值流
+        // mapToInt() 方法中将 Employee 类型转成 int 类型得到一个 intStream，所以需要先装箱成 Integer 再收集
+        List<Integer> ageList = employees.stream().mapToInt(employee -> employee.age).boxed().collect(Collectors.toList()); // [19, 24]
+        // 按员工年龄分组
+        Map<String, List<Employee>> map = employees.stream().collect(Collectors.groupingBy(employee -> {
+            if (employee.age < 20) {
+                return "< 20";
+            }
+            return ">= 20";
+        }));
     }
 }
